@@ -1,0 +1,4 @@
+clear
+g++ -o server-game.o server-game.cpp ship.cpp socket.cpp factory-entities.cpp entity.cpp bullet.cpp -g -std=c++0x -pthread -L/usr/local/lib -lcpp_redis -ltacopie
+#valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./server-game.o 8036
+./server-game.o 8036

@@ -1,0 +1,3 @@
+clear
+g++ -o t.o t.cpp
+./t.o

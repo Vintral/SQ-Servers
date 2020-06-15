@@ -1,0 +1,8 @@
+#!/usr/bin/sh
+
+
+for i in {1..99}
+do
+	nohup ./client.o 2>&1 &
+done
+./client.o

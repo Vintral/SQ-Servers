@@ -1,0 +1,4 @@
+clear
+g++ -o server-user.o server-user.cpp socket.cpp -g -std=c++1y -pthread -L/usr/local/lib -lcpp_redis -ltacopie
+#valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./server-user.o 8035
+./server-user.o 8035

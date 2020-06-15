@@ -1,0 +1,11 @@
+#!/usr/bin/sh
+
+PID=`/bin/ps -fu $USER| grep -E "Space|server-master|server-login|server-user|server-game" | grep -v "grep" | awk '{print $2}'`
+
+if [ "" != "$PID" ]
+then
+        echo "Killing Server..."
+        kill $PID
+else
+        echo "No Running Servers"
+fi

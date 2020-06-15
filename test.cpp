@@ -1,0 +1,83 @@
+#include <uuid.h>
+#include <iostream>
+#include <stdio.h>
+#include <stdlib.h>
+#include <thread>
+
+using namespace std;
+
+int counter1 = 0;
+int counter2 = 0;
+int x = 10;
+int x1 = 0;
+int x2 = 0;
+
+void checker() {
+    std::cout<<"Starting up Checker"<<std::endl;
+
+    while( true ) {
+        usleep( 1000000 ); // Waits for 1 second
+
+	cout<<"x1 = "<<x1<<"   x2 = "<<x2<<"    count1="<<counter1<<"    counter2="<<counter2<<endl;
+
+        counter1 = 0;
+	counter2 = 0;
+    }
+}
+
+void checker1() {
+	std::cout<<"Starting up Method 1"<<std::endl;
+
+	while( true ) {
+		counter1++;
+		x1 = x *  360;	
+	}
+}
+
+void checker2() {
+	std::cout<<"Starting up Method 2"<<std::endl;
+
+	while( true ) {
+		x2 = ( x << 8 ) + ( x << 6 ) + ( x << 5 ) + ( x << 3 );
+		counter2++;
+	}
+}
+
+
+int main() {
+	cout<<"Hello World"<<endl;
+
+	FILE *fp;
+	fp = popen( "/usr/bin/uuidgen", "r" );
+	if( fp == NULL ) {
+		printf( "FAILED TO RUN\n" );
+		exit( 1 );
+	}
+
+	char path[500];
+	int n = 0;
+	while( fgets( path, sizeof( path ) - 1, fp ) != NULL ) {
+		printf( "%s", path );
+		n++;
+	}
+
+	pclose( fp );
+
+	string guid = path;
+	guid.resize( guid.length() - 1 );
+
+	cout<<"Chars: "<<n<<endl;
+	cout<<"KEY: "<<guid<<endl;
+	cout<<"Length: "<<guid.length()<<endl;
+
+
+	std::thread first( checker );
+	std::thread second( checker1 );
+	std::thread third( checker2 );
+
+	while( true ) {
+
+	}
+
+	return 0;
+}
